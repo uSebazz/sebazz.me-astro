@@ -1,3 +1,7 @@
+---
+import ToggleTheme from "./ToggleTheme.astro";
+---
+
 <nav
   class="border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-100"
 >
@@ -9,7 +13,7 @@
     </a>
     <button
       type="button"
-      class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 focus:outline-none md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      class="inline-flex h-10 w-10 rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 focus:outline-none md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       aria-controls="navbar-solid-bg"
       aria-expanded="false"
       id="navbar-solid-trigger"
@@ -55,32 +59,35 @@
             >Contact</a
           >
         </li>
+        <li>
+          <ToggleTheme />
+        </li>
       </ul>
     </div>
   </div>
+
+  <script>
+    import { Collapse } from "flowbite";
+    import type { CollapseInterface } from "flowbite";
+
+    // set the target element that will be collapsed or expanded (eg. navbar menu)
+    const $targetEl: HTMLElement | null =
+      document.getElementById("navbar-solid-bg");
+    if (!$targetEl) {
+      throw new Error(
+        "Trigger element with ID 'navbar-solid-trigger' not found.",
+      );
+    }
+    // optionally set a trigger element (eg. a button, hamburger icon)
+    const $triggerEl = document.getElementById(
+      "navbar-solid-trigger",
+    ) as HTMLElement | null;
+    if (!$triggerEl) {
+      throw new Error(
+        "Trigger element with ID 'navbar-solid-trigger' not found.",
+      );
+    }
+    const collapse: CollapseInterface = new Collapse($targetEl, $triggerEl);
+    collapse.expand();
+  </script>
 </nav>
-
-<script>
-  import { Collapse } from "flowbite";
-  import type { CollapseInterface } from "flowbite";
-
-  // set the target element that will be collapsed or expanded (eg. navbar menu)
-  const $targetEl: HTMLElement | null =
-    document.getElementById("navbar-solid-bg");
-  if (!$targetEl) {
-    throw new Error(
-      "Trigger element with ID 'navbar-solid-trigger' not found.",
-    );
-  }
-  // optionally set a trigger element (eg. a button, hamburger icon)
-  const $triggerEl = document.getElementById(
-    "navbar-solid-trigger",
-  ) as HTMLElement | null;
-  if (!$triggerEl) {
-    throw new Error(
-      "Trigger element with ID 'navbar-solid-trigger' not found.",
-    );
-  }
-  const collapse: CollapseInterface = new Collapse($targetEl, $triggerEl);
-  collapse.expand();
-</script>
