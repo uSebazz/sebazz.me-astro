@@ -3,3 +3,60 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@tailwind utilities;
+
+@theme {
+  /* Base colors */
+  --color-black: #000000;
+  --color-green-primary: #39b58a;
+  --color-teal-primary: #3eae9b;
+  --color-teal-dark: #3d8e8a;
+  --color-white: #ffffff;
+
+  /* Color palette with variations */
+  --color-black-100: #000000;
+  --color-black-200: #1a1a1a;
+  --color-black-300: #333333;
+  --color-black-400: #4d4d4d;
+  --color-black-500: #666666;
+
+  --color-green-100: #e6f7f1;
+  --color-green-200: #bfeadb;
+  --color-green-300: #7dd6b5;
+  --color-green-400: #39b58a;
+  --color-green-500: #2e9370;
+  --color-green-600: #237155;
+
+  --color-teal-100: #e6f6f4;
+  --color-teal-200: #bfeae4;
+  --color-teal-300: #7dd2c7;
+  --color-teal-400: #3eae9b;
+  --color-teal-500: #328c7c;
+  --color-teal-600: #256b5e;
+
+  --color-teal-dark-100: #e6f1f1;
+  --color-teal-dark-200: #bfe1df;
+  --color-teal-dark-300: #7dbbb7;
+  --color-teal-dark-400: #3d8e8a;
+  --color-teal-dark-500: #31726e;
+  --color-teal-dark-600: #255654;
+
+  --color-white-100: #ffffff;
+  --color-white-200: #f5f5f5;
+  --color-white-300: #e6e6e6;
+  --color-white-400: #cccccc;
+  --color-white-500: #b3b3b3;
+}
+
+html,
+body {
+  font-family:
+    "Inter Variable",
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    Segoe UI Symbol,
+    "Noto Color Emoji";
+}
