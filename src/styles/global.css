@@ -7,11 +7,9 @@
 
 @theme {
   /* Base colors */
-  --color-black: #000000;
   --color-green-primary: #39b58a;
   --color-teal-primary: #3eae9b;
   --color-teal-dark: #3d8e8a;
-  --color-white: #ffffff;
 
   /* Color palette with variations */
   --color-black-100: #000000;
@@ -59,4 +57,25 @@ body {
     "Segoe UI Emoji",
     Segoe UI Symbol,
     "Noto Color Emoji";
+}
+
+/* Base styles and dark mode transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+/* Make theme transitions smooth */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Ensure menu transitions are smooth */
+#navbar-mobile-menu {
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+/* Keep text transitions fast to avoid readability issues */
+p, h1, h2, h3, h4, h5, h6, span, a {
+  transition: color 0.15s ease;
 }

@@ -1,16 +1,11 @@
 <button
   id="theme-toggle"
   type="button"
-  class="flex items-center gap-2 rounded-lg text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none md:p-0 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+  class="rounded-lg text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
 >
-  <span
-    id="theme-toggle-text"
-    class="block rounded-sm px-3 py-2 text-gray-900 hover:bg-gray-100 md:hidden dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
-    >Toggle Theme</span
-  >
   <svg
     id="icon-theme-dark"
-    class="hidden h-6 w-6 text-gray-900 dark:text-white"
+    class="h-6 w-6 text-gray-900 dark:text-white"
     fill="currentColor"
     viewBox="0 -960 960 960"
     xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +15,7 @@
   >
   <svg
     id="icon-theme-light"
-    class="hidden h-6 w-6 text-gray-900 dark:text-white"
+    class="h-6 w-6 text-gray-900 dark:text-white"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
@@ -33,15 +28,10 @@
 
 <script>
   const button = document.querySelector("#theme-toggle");
-  const toggleText = document.querySelector("#theme-toggle-text");
   const iconDark = document.querySelector("#icon-theme-dark");
   const iconLight = document.querySelector("#icon-theme-light");
 
   function updateUI(currentTheme: string) {
-    const nextTheme = currentTheme === "light" ? "dark" : "light";
-
-    toggleText!.textContent = `Toggle theme to ${nextTheme}`;
-
     if (currentTheme === "light") {
       iconLight?.classList.remove("hidden");
       iconDark?.classList.add("hidden");
@@ -51,7 +41,16 @@
     }
   }
 
-  let currentTheme = document.documentElement.dataset.theme || "light";
+  // Get theme from localStorage or default to light
+  let currentTheme =
+    localStorage.getItem("theme") ||
+    document.documentElement.dataset.theme ||
+    "light";
+
+  // Set initial theme on page load
+  document.documentElement.dataset.theme = currentTheme;
+
+  // Show/hide appropriate icon
   updateUI(currentTheme);
 
   button!.addEventListener("click", () => {
