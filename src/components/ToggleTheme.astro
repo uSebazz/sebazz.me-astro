@@ -1,11 +1,15 @@
+---
+// Genera un ID único para cada instancia del componente
+const uniqueId = `theme-toggle-${Math.random().toString(36).substring(2, 11)}`;
+---
+
 <button
-  id="theme-toggle"
+  id={uniqueId}
   type="button"
-  class="rounded-lg text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+  class="theme-toggle-btn rounded-lg text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
 >
   <svg
-    id="icon-theme-dark"
-    class="h-6 w-6 text-gray-900 dark:text-white"
+    class="icon-theme-dark h-6 w-6 text-gray-900 dark:text-white"
     fill="currentColor"
     viewBox="0 -960 960 960"
     xmlns="http://www.w3.org/2000/svg"
@@ -14,8 +18,7 @@
     ></path></svg
   >
   <svg
-    id="icon-theme-light"
-    class="h-6 w-6 text-gray-900 dark:text-white"
+    class="icon-theme-light h-6 w-6 text-gray-900 dark:text-white"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
@@ -26,12 +29,15 @@
   >
 </button>
 
-<script>
-  const button = document.querySelector("#theme-toggle");
-  const iconDark = document.querySelector("#icon-theme-dark");
-  const iconLight = document.querySelector("#icon-theme-light");
+<script define:vars={{ uniqueId }}>
+  // Usando el ID único pasado desde el frontmatter
+  const button = document.getElementById(uniqueId);
 
-  function updateUI(currentTheme: string) {
+  // Buscamos los iconos dentro de este botón específico (alcance limitado)
+  const iconDark = button?.querySelector(".icon-theme-dark");
+  const iconLight = button?.querySelector(".icon-theme-light");
+
+  function updateUI(currentTheme) {
     if (currentTheme === "light") {
       iconLight?.classList.remove("hidden");
       iconDark?.classList.add("hidden");
@@ -53,10 +59,23 @@
   // Show/hide appropriate icon
   updateUI(currentTheme);
 
-  button!.addEventListener("click", () => {
+  button?.addEventListener("click", () => {
     currentTheme = currentTheme === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = currentTheme;
     localStorage.setItem("theme", currentTheme);
-    updateUI(currentTheme);
+
+    // Actualiza todos los toggles en la página para mantener sincronizado
+    document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
+      const darkIcon = btn.querySelector(".icon-theme-dark");
+      const lightIcon = btn.querySelector(".icon-theme-light");
+
+      if (currentTheme === "light") {
+        lightIcon?.classList.remove("hidden");
+        darkIcon?.classList.add("hidden");
+      } else {
+        darkIcon?.classList.remove("hidden");
+        lightIcon?.classList.add("hidden");
+      }
+    });
   });
 </script>
